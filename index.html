@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 
-<head></head>
-
+<head>
+    <meta charset="utf-8">
+</head>
 
 <body>
     <div>
         <video style="z-index: -1;" id="magic" class="video" src="magic_short.mp4" loop autoplay muted></video>
         <video id="idle_video" class="video" src="idle_short.mp4" loop autoplay muted></video>
-        <image id="hand" class="hand" src="hand.png"></image>
+        <div class="hand_text_container">
+            <div id="magic_text" class="magic_text"> Волшебное напутствие </div>
+            <image id="hand" class="hand" src="hand.png"></image>
+        </div>
     </div>
 </body>
 
@@ -43,6 +47,38 @@
         }, 10);
     }
 
+    function fadeintext(text) {
+        let magic_text = document.getElementById("magic_text")
+        magic_text.innerText = text
+        magic_text.style.opacity = 0;
+        console.log("fading")
+        const fadeInInterval = setInterval(() => {
+            magic_text.style.opacity = parseFloat(magic_text.style.opacity) + 0.01;
+            magic_text.style.textAlign = "center"
+            if (magic_text.style.opacity >= 1) {
+                clearInterval(fadeInInterval);
+            }
+        }, 10);
+    }
+
+    function fadeouttext() {
+        let magic_text = document.getElementById("magic_text")
+        magic_text.style.opacity = 0;
+        const fadeInInterval = setInterval(() => {
+            magic_text.style.opacity = parseFloat(magic_text.style.opacity) - 0.01;
+            if (magic_text.style.opacity <= 0) {
+                clearInterval(fadeInInterval);
+            }
+        }, 10);
+    }
+
+    const screen_texts = [
+        "Не думай, делай",
+        "Будьте внимательны к знакам судьбы",
+        "Счастье не за горами",
+    ]
+
+
     // Call the fadeVideos function when needed, for example,
     clicked = false
     hand.onclick = () => {
@@ -50,10 +86,11 @@
             clicked = true
             fadeVideos(video, magic_video)
             setTimeout(() => {
-                alert("GiveTicket + text on screen")
-            }, 5000)
+                fadeintext(screen_texts[Math.floor(Math.random() * screen_texts.length)])
+            }, 5000);
             setTimeout(() => {
                 fadeVideos(magic_video, video)
+                fadeouttext()
                 clicked = false
             }, 15000)
         }
