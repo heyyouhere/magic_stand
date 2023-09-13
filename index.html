@@ -61,6 +61,11 @@
         }, 10);
     }
 
+
+    function sendSignal() {
+        console.log("Sending signal to server!")
+    }
+
     function fadeouttext() {
         let magic_text = document.getElementById("magic_text")
         magic_text.style.opacity = 0;
@@ -87,6 +92,7 @@
             fadeVideos(video, magic_video)
             setTimeout(() => {
                 fadeintext(screen_texts[Math.floor(Math.random() * screen_texts.length)])
+                sendSignal()
             }, 5000);
             setTimeout(() => {
                 fadeVideos(magic_video, video)
