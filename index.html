@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+
+
+<body>
+    <div>
+        <video id="idle_video" class="video" src="loop.webm" loop autoplay muted></video>
+        <video id="magic" class="video" src="hand_touched.webm" loop autoplay muted hidden>
+            </video>
+        <image id="hand" class="hand" src="hand.png"></image>
+    </div>
+</body>
+
+
+
+<script>
+    let video = document.getElementById("idle_video");
+    let magic_video = document.getElementById("magic");
+    let hand = document.getElementById("hand");
+    hand.onclick = () => {
+        video.hidden = true
+        magic_video.hidden = false
+        console.log("Hand Touched")
+    }
+</script>
+
+<link rel="stylesheet" href="style.css">
+
+
+</html>

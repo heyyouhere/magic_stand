@@ -1,0 +1,15 @@
+.video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.hand {
+    position: absolute;
+    margin-top: 6%;
+    margin-left: 32%;
+    height: 70%;
+    z-index: 10;
+}
