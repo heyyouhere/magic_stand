@@ -22,6 +22,13 @@
     hand.onclick = () => {
         video.hidden = true
         magic_video.hidden = false
+        setTimeout(() => {
+            alert("GiveTicket + text on screen")
+        }, 2000)
+        setTimeout(() => {
+            video.hidden = false
+            magic_video.hidden = true
+        }, 5000)
         console.log("Hand Touched")
     }
 </script>
