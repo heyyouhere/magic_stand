@@ -6,9 +6,8 @@
 
 <body>
     <div>
+        <video style="z-index: -1;" id="magic" class="video" src="magic_short.mp4" loop autoplay muted></video>
         <video id="idle_video" class="video" src="idle_short.mp4" loop autoplay muted></video>
-        <video id="magic" class="video" src="magic_short.mp4" loop autoplay muted hidden>
-            </video>
         <image id="hand" class="hand" src="hand.png"></image>
     </div>
 </body>
@@ -19,17 +18,45 @@
     let video = document.getElementById("idle_video");
     let magic_video = document.getElementById("magic");
     let hand = document.getElementById("hand");
+
+    function fadeVideos(video1, video2) {
+        video1.style.opacity = 1;
+        video2.style.opacity = 0;
+
+        video2.play();
+
+        const fadeOutInterval = setInterval(() => {
+            video1.style.opacity -= 0.01;
+
+            if (video1.style.opacity <= 0) {
+                clearInterval(fadeOutInterval);
+                video1.pause();
+            }
+        }, 10);
+
+        const fadeInInterval = setInterval(() => {
+            video2.style.opacity = parseFloat(video2.style.opacity) + 0.01;
+
+            if (video2.style.opacity >= 1) {
+                clearInterval(fadeInInterval);
+            }
+        }, 10);
+    }
+
+    // Call the fadeVideos function when needed, for example,
+    clicked = false
     hand.onclick = () => {
-        video.hidden = true
-        magic_video.hidden = false
-        setTimeout(() => {
-            alert("GiveTicket + text on screen")
-        }, 2000)
-        setTimeout(() => {
-            video.hidden = false
-            magic_video.hidden = true
-        }, 5000)
-        console.log("Hand Touched")
+        if (!clicked) {
+            clicked = true
+            fadeVideos(video, magic_video)
+            setTimeout(() => {
+                alert("GiveTicket + text on screen")
+            }, 5000)
+            setTimeout(() => {
+                fadeVideos(magic_video, video)
+                clicked = false
+            }, 15000)
+        }
     }
 </script>
 
