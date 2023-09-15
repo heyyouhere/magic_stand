@@ -11,6 +11,12 @@ Copy videos to new folder /magic_stand/
 ```console
 $ cd idle_short.mp4 magic_short.mp4 /magic_stand/
 ```
+Install python dependencies:
+```console
+$ sudo apt install pip
+$ pip install -r /magic_stand/requirements.txt
+
+
 Then setup startup:
 - Activities -> \[type\] Startup -> start_kiosk.sh
 Then setup autologin:

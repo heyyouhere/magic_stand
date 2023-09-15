@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body class="body_class">
+    <div class="main_container">
+        <video style="z-index: -1;" id="magic" class="video" src="static/magic_short.mp4" loop autoplay muted></video>
+        <video id="idle_video" class="video" src="static/idle_short.mp4" loop autoplay muted></video>
+        <div class="hand_text_container">
+            <div id="magic_text" class="magic_text"> Волшебное напутствие </div>
+            <image id="hand" class="hand" src="static/hand.png"></image>
+        </div>
+    </div>
+</body>
+
+
+
+<script>
+    let video = document.getElementById("idle_video");
+    let magic_video = document.getElementById("magic");
+    let hand = document.getElementById("hand");
+
+    function fadeVideos(video1, video2) {
+        video1.style.opacity = 1;
+        video2.style.opacity = 0;
+
+        video2.play();
+
+        const fadeOutInterval = setInterval(() => {
+            video1.style.opacity -= 0.01;
+
+            if (video1.style.opacity <= 0) {
+                clearInterval(fadeOutInterval);
+                video1.pause();
+            }
+        }, 10);
+
+        const fadeInInterval = setInterval(() => {
+            video2.style.opacity = parseFloat(video2.style.opacity) + 0.01;
+
+            if (video2.style.opacity >= 1) {
+                clearInterval(fadeInInterval);
+            }
+        }, 10);
+    }
+
+    function fadeintext(text) {
+        let magic_text = document.getElementById("magic_text")
+        magic_text.innerText = text
+        magic_text.style.opacity = 0;
+        console.log("fading")
+        const fadeInInterval = setInterval(() => {
+            magic_text.style.opacity = parseFloat(magic_text.style.opacity) + 0.01;
+            magic_text.style.textAlign = "center"
+            if (magic_text.style.opacity >= 1) {
+                clearInterval(fadeInInterval);
+            }
+        }, 10);
+    }
+
+
+    function sendSignal() {
+        url = "http://127.0.0.1:1583/signal"
+        let xmlHttpReq = new XMLHttpRequest();
+        xmlHttpReq.open("GET", url, false);
+        xmlHttpReq.send(null);
+        console.log("send to server");
+        return xmlHttpReq.responseText;
+    }
+
+    function fadeouttext() {
+        let magic_text = document.getElementById("magic_text")
+        magic_text.style.opacity = 0;
+        const fadeInInterval = setInterval(() => {
+            magic_text.style.opacity = parseFloat(magic_text.style.opacity) - 0.01;
+            if (magic_text.style.opacity <= 0) {
+                clearInterval(fadeInInterval);
+            }
+        }, 10);
+    }
+
+    const screen_texts = [
+        "Не думай, делай",
+        "Будьте внимательны к знакам судьбы",
+        "Счастье не за горами",
+    ]
+
+
+    // Call the fadeVideos function when needed, for example,
+    clicked = false
+    hand.onclick = () => {
+        if (!clicked) {
+            clicked = true
+            fadeVideos(video, magic_video)
+            setTimeout(() => {
+                fadeintext(screen_texts[Math.floor(Math.random() * screen_texts.length)])
+                sendSignal()
+            }, 5000);
+            setTimeout(() => {
+                fadeVideos(magic_video, video)
+                fadeouttext()
+                clicked = false
+            }, 15000)
+        }
+    }
+</script>
+
+<link rel="stylesheet" href="static/style.css">
+
+
+</html>
