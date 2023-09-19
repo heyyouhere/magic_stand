@@ -24,6 +24,9 @@
     let video = document.getElementById("idle_video");
     let magic_video = document.getElementById("magic");
     let hand = document.getElementById("hand");
+    let bg_music = document.getElementById("bg_music")
+
+    bg_music.volume = 0.8
 
     function fadeVideos(video1, video2) {
         video1.style.opacity = 1;
@@ -100,6 +103,7 @@
             fadeVideos(video, magic_video)
             setTimeout(() => {
                 let reveal = document.getElementById("reveal_music")
+                reveal.volume = 1
                 reveal.play()
                 fadeintext(screen_texts[Math.floor(Math.random() * screen_texts.length)])
                 sendSignal()
