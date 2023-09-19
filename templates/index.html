@@ -6,6 +6,8 @@
 </head>
 
 <body class="body_class">
+    <audio src="static/background.mp3" loop autoplay></audio>
+    <audio id="reveal_music" src="static/reveal.mp3"></audio>
     <div class="main_container">
         <video style="z-index: -1;" id="magic" class="video" src="static/magic_short.mp4" loop autoplay muted></video>
         <video id="idle_video" class="video" src="static/idle_short.mp4" loop autoplay muted></video>
@@ -71,6 +73,7 @@
         return xmlHttpReq.responseText;
     }
 
+
     function fadeouttext() {
         let magic_text = document.getElementById("magic_text")
         magic_text.style.opacity = 0;
@@ -96,6 +99,8 @@
             clicked = true
             fadeVideos(video, magic_video)
             setTimeout(() => {
+                let reveal = document.getElementById("reveal_music")
+                reveal.play()
                 fadeintext(screen_texts[Math.floor(Math.random() * screen_texts.length)])
                 sendSignal()
             }, 5000);

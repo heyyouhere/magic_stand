@@ -1,4 +1,2 @@
-$path = "C:\Users\$env:UserName\magic_stand\"
-
 Start-Process python -ArgumentList "flask_server.py" -NoNewWindow
-Start-Process $path -ArgumentList "--kiosk" -NoNewWindow
+Start-Process "C:\Program Files (x86)\Mozilla Firefox\firefox.exe" -ArgumentList "--kiosk localhost:1583" -NoNewWindow

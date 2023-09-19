@@ -1,6 +1,6 @@
-from flask import Flask, render_template, jsonify
-
 import serial.tools.list_ports
+from flask import Flask, jsonify, render_template
+
 app = Flask(__name__)
 
 #____________COM PORT SETTINGS_________________________#
