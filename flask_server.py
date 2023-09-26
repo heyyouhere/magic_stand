@@ -56,6 +56,6 @@ def got_signal():
         return jsonify('success', 200)
         # serialPort.write(1)
 
-#os.system("C:/Progra~1/Mozill~1/firefox.exe --kiosk localhost:1583")
-os.system("C:/Progra~1/Mozill~1/firefox.exe localhost:1583")
+os.system("C:/Progra~1/Mozill~1/firefox.exe --kiosk localhost:1583")
+#os.system("C:/Progra~1/Mozill~1/firefox.exe localhost:1583")
 app.run(host='0.0.0.0', port=1583)
