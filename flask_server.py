@@ -1,6 +1,6 @@
 import os
-    import serial
 
+import serial
 import serial.tools.list_ports
 from flask import Flask, jsonify, render_template
 
